@@ -20,3 +20,5 @@ class EmployeeService {
         }
     }
 }
+
+module.exports = new EmployeeService();

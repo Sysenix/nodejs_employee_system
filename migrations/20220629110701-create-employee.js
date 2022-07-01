@@ -27,14 +27,6 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      },
-      colorID:{
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        references: {
-          model: 'ColorCategory',
-          key: 'id'
-        }
       }
     });
   },

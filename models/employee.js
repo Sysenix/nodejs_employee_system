@@ -19,11 +19,9 @@ module.exports = (sequelize, DataTypes) => {
         }
       });
       models.ColorCategory.belongsTo(Employee);
-    /*  Employee.hasMany(models.TimeOffs,{
-        as: 'timeOffs',
-        foreignKey: 'id'
-      });
-      models.TimeOffs.belongsTo(Employee);*/
+
+      Employee.hasMany(models.TimeOffs);
+      models.TimeOffs.belongsTo(Employee);
     }
   }
   Employee.init({
