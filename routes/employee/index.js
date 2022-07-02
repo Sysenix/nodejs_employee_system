@@ -27,4 +27,32 @@ router.post('/update', (req, res) => {
     console.log('Update request:', first_name, last_name, date_of_birth);
 });
 
+router.get('/employee/:id', async (req, res) => {
+    const id = req.params.id;
+    if (!id){
+        return res.status(400).send({ message: 'Please specify employee id.'})
+    }
+    await EmployeeService.findEmployee(parseInt(id)).then((response) => {
+        if (response){
+            return res.status(200).send({success: true, message: response});
+        }else{
+            return res.status(404).send({success: false, message:'User not found! '});
+        }
+    })
+});
+
+router.delete('/employee/:id', async (req, res) => {
+    const id = req.params.id;
+    if (!id){
+        return res.status(400).send({ message: 'Please specify employee id.'})
+    }
+    await EmployeeService.deleteEmployee(parseInt(id)).then((response) => {
+        if(response){
+            return res.status(204).send({success: true, message: response});
+        }else{
+            return res.status(404).send({success: false, message:'User not found !'});
+        }
+    })
+});
+
 module.exports = router;

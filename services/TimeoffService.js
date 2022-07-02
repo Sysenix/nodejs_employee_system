@@ -1,8 +1,17 @@
-const Models = require('../models');
+const db = require('../models');
 
+//console.log(User === sequelize.models.User); // true
 class TimeoffService{
-    constructor(sequelize){
-        Models(sequelize);
-        this.models = sequelize.models;
+    constructor(db){
+        this.models = db.models;
+    }
+    async createTimeoff(start, end, employee_id){
+        try {
+            const timeoff = await this.models.TimeOffs.create(start, end, employee_id);
+            return timeoff;
+        } catch (error) {
+            return error;
+        }
     }
 }
+module.exports = TimeoffService;

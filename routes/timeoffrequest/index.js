@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const EmployeeService = require('../../services/EmployeeService');
+const TimeoffService = require('../../services/TimeoffService');
 
-const {Employee} = require('../models');
+
+router.get('/timeoff/:id', async (req, res) => {
+    const id = req.params.id;
+
+})
+module.exports = router;

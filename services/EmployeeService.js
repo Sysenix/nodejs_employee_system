@@ -1,10 +1,12 @@
-const Models = require('../models');
+const db = require('../models');
 
 class EmployeeService {
-    constructor(sequelize) {
+    constructor(db) {
+        /*
         Models(sequelize);
-        this.client = sequelize;
-        this.models = sequelize.models;
+        this.client = sequelize;*/
+        
+        this.models = db.models;
     }
     async createEmployee({firstName, lastName, dateofbirth, bloodGroup, color_id}) {
         try {
@@ -19,6 +21,40 @@ class EmployeeService {
             return error;
         }
     }
+    async deleteEmployee(employee_id) {
+        try {
+            const f_employee = await this.findEmployee(employee_id);
+            if(f_employee){
+                const d_employee = await this.models.destroy({where:{id: f_employee.id}});
+                return d_employee;
+            }else{
+                return null;
+            }
+        } catch (error) {
+            return error;
+        }
+    }
+    async findEmployee(employee_id){
+        try {
+            const f_employee = await this.models.Employee.findByPk(employee_id);
+            if (f_employee){
+                return f_employee;
+            }else{
+              return null;
+            }
+        } catch (error) {
+            return error;
+        }
+    }
+    async getAllEmployees(){
+        try {
+            const employees = await this.models.Employee.findAll();
+            return employees;
+        } catch (error) {
+            return error;
+        }
+    }
+    
 }
 
-module.exports = new EmployeeService();
+module.exports = EmployeeService;
