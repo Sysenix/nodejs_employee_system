@@ -25,6 +25,7 @@ class EmployeeService {
         try {
             const f_employee = await this.findEmployee(employee_id);
             if(f_employee){
+                // await f_employee.destroy();
                 const d_employee = await this.models.destroy({where:{id: f_employee.id}});
                 return d_employee;
             }else{

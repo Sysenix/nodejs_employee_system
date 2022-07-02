@@ -12,7 +12,7 @@ router.post('/create', async (req,res) => {
     }
     try {
         const c_employee = await EmployeeService.createEmployee(req.body).then((response) => {
-            return res.status(200).send({success: true, message: response.message});
+            return res.status(201).send({success: true, message: response.message});
         });
 
     } catch (error) {
@@ -53,6 +53,28 @@ router.delete('/employee/:id', async (req, res) => {
             return res.status(404).send({success: false, message:'User not found !'});
         }
     })
+});
+
+// Update
+router.put('/employee/:id', async (req, res) => {
+    const id = req.params.id;
+    const {first_Name, last_Name, blood_Group } = req.body;
+    try {
+        await EmployeeService.findEmployee(parseInt(id)).then((employee) => {
+            if(employee){
+                employee.firstName = first_Name;
+                employee.lastName = last_Name;
+                employee.bloodGroup = blood_Group;
+
+                await employee.save();
+                return res.status(200).send({success: true, message: response})
+            }else{
+                return res.status(404).send({success: false, message:'User not found !'});
+            }
+        })
+    } catch (error) {
+        return res.status(500).send({success: false, message: "Something went wrong!", error: error});
+    }
 });
 
 module.exports = router;
