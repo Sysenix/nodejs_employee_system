@@ -4,6 +4,7 @@ const router = express.Router();
 const EmployeeService = require('../../services/EmployeeService');
 // const {Employee} = require('../../models');
 
+const employeeService = new EmployeeService();
 
 router.post('/create', async (req,res) => {
     const {first_name, last_name, date_of_birth, blood_group, color_id} = req.body;
@@ -11,8 +12,8 @@ router.post('/create', async (req,res) => {
         res.status(400).send({message: 'Please fill all required fields. All fields are required.'});
     }
     try {
-        const c_employee = await EmployeeService.createEmployee(req.body).then((response) => {
-            return res.status(201).send({success: true, message: response.message});
+        const c_employee = await employeeService.createEmployee(req.body).then((response) => {
+            return res.status(201).send({success: true, message: response});
         });
 
     } catch (error) {
@@ -32,7 +33,7 @@ router.get('/employee/:id', async (req, res) => {
     if (!id){
         return res.status(400).send({ message: 'Please specify employee id.'})
     }
-    await EmployeeService.findEmployee(parseInt(id)).then((response) => {
+    await employeeService.findEmployee(parseInt(id)).then((response) => {
         if (response){
             return res.status(200).send({success: true, message: response});
         }else{
@@ -46,7 +47,7 @@ router.delete('/employee/:id', async (req, res) => {
     if (!id){
         return res.status(400).send({ message: 'Please specify employee id.'})
     }
-    await EmployeeService.deleteEmployee(parseInt(id)).then((response) => {
+    await employeeService.deleteEmployee(parseInt(id)).then((response) => {
         if(response){
             return res.status(204).send({success: true, message: response});
         }else{
@@ -60,7 +61,7 @@ router.put('/employee/:id', async (req, res) => {
     const id = req.params.id;
     const {first_Name, last_Name, blood_Group } = req.body;
     try {
-        await EmployeeService.findEmployee(parseInt(id)).then((employee) => {
+        await employeeService.findEmployee(parseInt(id)).then(async (employee) => {
             if(employee){
                 employee.firstName = first_Name;
                 employee.lastName = last_Name;
