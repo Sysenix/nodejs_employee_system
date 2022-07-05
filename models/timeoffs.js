@@ -11,11 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      TimeOffs.hasOne(models.Employee,{
-        as: 'EmployeeID',
-        foreignKey: 'id'
-      });
-      TimeOffs.belongsTo(models.Employee);
+      // TimeOffs.hasOne(models.Employee,{
+      //   as: 'EmployeeID',
+      //   foreignKey: 'id'
+      // });
+      // TimeOffs.belongsTo(models.Employee);
     }
   }
   TimeOffs.init({

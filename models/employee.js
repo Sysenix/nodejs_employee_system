@@ -11,16 +11,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Employee.hasOne(models.ColorCategory,{
-        as: 'colorID',
-        foreignKey: {
-          name: 'id',
-          allowNull: true
-        }
-      });
-      models.ColorCategory.belongsTo(Employee);
-
-      Employee.hasMany(models.TimeOffs);
+      // Employee.hasOne(models.ColorCategory,{
+      //   foreignKey: {
+      //     name: 'id',
+      //     allowNull: true
+      //   }
+      // });
+      
+      // sourceKey = "hexid"
+      models.ColorCategory.hasMany(Employee ,{ foreignKey: {name: 'colorId', allowNull: true, sourceKey: 'colorName'}});
+      //Employee.hasMany(models.ColorCategory);
+      Employee.hasMany(models.TimeOffs, {foreignKey: { allowNull: false, onDelete: 'CASCADE'}});
       models.TimeOffs.belongsTo(Employee);
     }
   }

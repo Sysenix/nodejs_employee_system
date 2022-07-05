@@ -4,20 +4,29 @@ const models = require('../models/index');
 class EmployeeService {
 
     async createEmployee(params) {
-        const {first_Name, last_Name, dateof_birth, blood_Group, color_id} = params;
-        try {
-            this.models
-            const c_employee = await Employee.create({
-                firstName: first_Name,
-                lastName: last_Name, 
-                dateofbirth: dateof_birth, 
-                bloodGroup: blood_Group
-            });
-            return c_employee;
-        } catch (error) {
-            return error;
+        const {first_name, last_name, date_of_birth, blood_group, color_id} = params;
+        const f_employee = await this.findEmployee(last_name);
+        if(f_employee){
+            return false;
+        }else{
+            try {
+            
+                const c_employee = await Employee.create({
+                    firstName: first_name,
+                    lastName: last_name, 
+                    dateofBirth: date_of_birth, 
+                    bloodGroup: blood_group,
+                    colorId: color_id
+                });
+                return c_employee;
+            } catch (error) {
+                console.log(error.message);
+                return error;
+            }
         }
     }
+
+
     async deleteEmployee(employee_id) {
         try {
             const f_employee = await this.findEmployee(employee_id);
@@ -29,26 +38,42 @@ class EmployeeService {
                 return null;
             }
         } catch (error) {
+            console.log(error);
             return error;
         }
     }
     async findEmployee(employee_id){
-        try {
-            const f_employee = await Employee.findByPk(employee_id);
-            if (f_employee){
-                return f_employee;
-            }else{
-              return null;
+        if(!isNaN(employee_id)){
+            try {
+                const f_employee = await Employee.findByPk(employee_id);
+                if (f_employee){
+                    return f_employee;
+                }else{
+                  return null;
+                }
+            } catch (error) {
+                return error;
             }
-        } catch (error) {
-            return error;
+        }else{
+            try {
+                const f_employee = await Employee.findOne({where: {lastName: employee_id}});
+                if (f_employee){
+                   return f_employee; // return employee if employee exists 
+                }else{
+                  return null; // return null if employee does not exist
+                }
+            } catch (error) {
+                return error;
+            }
         }
+
     }
     async getAllEmployees(){
         try {
             const employees = await Employee.findAll();
             return employees;
         } catch (error) {
+            console.log('Something went wrong during getAllEmployees', error.message);
             return error;
         }
     }

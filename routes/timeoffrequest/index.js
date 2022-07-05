@@ -1,11 +1,24 @@
+const { request } = require('express');
 const express = require('express');
 const router = express.Router();
 
 const TimeoffService = require('../../services/TimeoffService');
+const timeoffService = new TimeoffService();
 
-
-router.get('/timeoff/:id', async (req, res) => {
+router.get('/request/:id', async (req, res) => {
     const id = req.params.id;
+    
+    const date = Date();
+    try {
+        const req_timeoff = await timeoffService.createTimeoff(date,date,id);
+        if(req_timeoff){
+            return res.status(201).send({success: true, message: req_timeoff});
 
-})
+        }else{
+            return res.status(404).send({success: false, message: 'This employee is not exist.'});
+        }
+    } catch (error) {
+        throw error.message;
+    }
+});
 module.exports = router;

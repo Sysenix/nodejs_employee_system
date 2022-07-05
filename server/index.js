@@ -1,12 +1,12 @@
 const express = require('express');
 const db = require('../models');
-
-//database
-//const db = require('../models')
+const router = require('../routes/employee');
 
 
-// Routes
+// import Routes
 const r_employee = require('../routes/employee');
+const r_colorcategory = require('../routes/colorcategory');
+const r_timeoff = require('../routes/timeoffrequest');
 
 
 
@@ -26,7 +26,9 @@ console.log('Server started at http://%s:%d/', config.host, config.port);
 
 // ============== [ Routes ] ==============
 
-app.use(r_employee);
+app.use('/employee', r_employee);
+app.use('/colorcategory', r_colorcategory);
+app.use('/timeoff', r_timeoff)
 
 // ============== [ Routes - End ] ========
 
@@ -36,14 +38,14 @@ app.get('/', (req, res) => {
     if(query.length > 0){console.log(query);};
 });
 app.get('/api', (req, res) => {
-    res.json({message: 'Hello from beaar server!'});
+    res.json({message: 'Hello from server!'});
 })
 
 app.listen(config.port,config.host, async () =>{
     // sync the database here first
     // db.sync() - This creates the table if it doesn't exist (and does nothing if it already exists)
     // db.sequelize.sync({force: true}) alter: true
-    db.sequelize.sync({force: true});
+    db.sequelize.sync({alter: true});
     console.log('Server listening on port '+config.port);
     console.log('================================= [ Listening ] ================================');
 });
