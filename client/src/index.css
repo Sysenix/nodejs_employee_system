@@ -7,7 +7,91 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.header, .form, .employees {
+  padding: 10px 50px;
+}
+.employees {
+  padding: 0 50px 50px;
+}
+
+.employees .employee-avatar img {
+  border-radius: 5px 5px 0 0;
+}
+.employees .details h4 {
+  margin: 10px 0;
+}
+
+.employees .details {
+  border-radius: 0 0 5px 5px;
+  background-color: var(--article-color);
+  margin: -10px 0 30px;
+  padding: 20px;
+  color: var(--text-color);
+  transition: background-color 0.4s;
+}
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 5rem;
+}
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-color);
+  background-color: hsl(209, 23%, 22%);
+  box-shadow: 0 5px 10px hsla(200, 15%, 8%, 0.1);
+}
+@media (min-width: 640px) {
+  .employees {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .employees .details {
+    margin: -10px 0 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .employees {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1366px) {
+  .employees {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .header h1 {
+    font-size: 20px;
+    padding: 20px 0;
+  }
+
+  .form input {
+    width: 90vw;
+    margin-bottom: 20px;
+  }
+
+  .form .select select {
+    width: 50vw;
+  }
 }

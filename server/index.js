@@ -19,7 +19,7 @@ const app = express();
 app.use(express.json());
 // app.use('/api', router);
 
-
+console.clear();
 console.log('================================= [ Starting ] =================================');
 console.log('Server started at http://%s:%d/', config.host, config.port);    
 

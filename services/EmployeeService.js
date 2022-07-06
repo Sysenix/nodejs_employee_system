@@ -1,16 +1,26 @@
 const { Employee } = require('../models');
 const models = require('../models/index');
 
+const ColorCategoryService = require('../services/ColorCategoryService');
+const colorCategoryService = new ColorCategoryService();
+
 class EmployeeService {
+    response = {
+    }
 
     async createEmployee(params) {
         const {first_name, last_name, date_of_birth, blood_group, color_id} = params;
         const f_employee = await this.findEmployee(last_name);
+        const f_color = await colorCategoryService.findColor(null, color_id);
         if(f_employee){
             return false;
-        }else{
+        } 
+        else if(!f_color){
+            return 'This color is not available.';
+        }
+        else{
             try {
-            
+
                 const c_employee = await Employee.create({
                     firstName: first_name,
                     lastName: last_name, 
