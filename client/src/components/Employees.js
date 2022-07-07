@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-
+import { Link, useParams } from "react-router-dom";
 const API_URL = '/employee';
 
 const Employees = () => {
@@ -22,14 +22,16 @@ const Employees = () => {
         <div className="employees">
             {employees.message.map((employee,index) => {
                 
-                const {firstName, lastName, dateofBirth, bloodGroup,colorId} = employee;
-                const styles ={
-                    border: '3px solid rgba(0,0,0,'+colorId+')'
+                const {id,firstName, lastName, dateofBirth, bloodGroup,colorId} = employee;
+                const colorList = ['','','','#2986cc','#000000','#FFC0CB','#FF83EE','#FF0000',''];
+                const avatarStyle ={
+                    backgroundColor: colorList[colorId]
                 }
                 return (
                     <div key={index}>
-                        <article>
-                            <div style={styles} className="employeeavatar">
+                        <Link to={`/employee/timeoff/${id}`}>
+                        <div className="employee">
+                            <div style={avatarStyle} className="employeeavatar">
                                 <img src="https://via.placeholder.com/150" alt={firstName}></img>
                             </div>
                             <div className="details">
@@ -43,7 +45,8 @@ const Employees = () => {
                                     Blood Group: {bloodGroup}
                                 </h4>
                             </div>
-                        </article>
+                        </div>
+                        </Link>
                     </div>
                 )
             })}

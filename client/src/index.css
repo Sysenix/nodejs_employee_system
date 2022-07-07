@@ -5,6 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color:  hsl(0, 0%, 93%);
+  transition: background-color 0.4s;
+
 }
 
 * {
@@ -22,22 +25,46 @@ code {
   padding: 10px 50px;
 }
 .employees {
-  padding: 0 10px 10px;
+  padding: 20px 10px 10px;
 }
-.employees .employeeavatar img {
+.employee {
+  box-shadow: 0 5px 10px hsla(200, 15%, 8%, 0.1);
+
   padding: 20px;
+}
+.employee:hover{
+  background-color: rgb(196, 196, 196);
 
 }
+.employees:hover{
+
+}
+.employeeavatar{
+
+  text-align: center;
+}
+.employees .employeeavatar img {
+
+  padding: 10px;
+
+}
+
 .employees .details h4 {
+  max-width: fit-content;
+
   margin: 10px 0;
+}
+.employees .details h2 {
+max-width: 120px;
+
 }
 
 .employees .details {
   border-radius: 0 0 5px 5px;
-  background-color: var(--article-color);
+  background-color: rgb(219, 219, 219);
   margin: -10px 0 30px;
   padding: 20px;
-  color: var(--text-color);
+  color: black;
   transition: background-color 0.4s;
 }
 .loading {
@@ -45,6 +72,7 @@ code {
   align-items: center;
   justify-content: center;
   text-align: center;
+  font-size: large;
   margin-top: 5rem;
 }
 .header {
@@ -52,8 +80,8 @@ code {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  color: var(--text-color);
-  background-color: hsl(209, 23%, 22%);
+  color:  hsl(0, 0%, 100%);
+  background-color: hsla(34, 100%, 50%, 0.733);
   box-shadow: 0 5px 10px hsla(200, 15%, 8%, 0.1);
 }
 @media (min-width: 640px) {
@@ -64,7 +92,7 @@ code {
   }
 
   .employees .details {
-    margin: -10px 0 0;
+    margin: -15px 0 0;
   }
 }
 

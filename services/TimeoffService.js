@@ -26,6 +26,7 @@ class TimeoffService{
         if(!isNaN(employee_id)){
             try {
                 const f_employee = await models.Employee.findByPk(employee_id);
+            
                 if (f_employee){
                     return true;
                 }else{

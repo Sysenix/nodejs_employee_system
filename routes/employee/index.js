@@ -81,7 +81,7 @@ router.delete('/:id', async (req, res) => {
 // Update
 router.put('/:id', async (req, res) => {
     const id = req.params.id;
-    const {first_name, last_name, date_of_birth, blood_group} = req.body;
+    const {first_name, last_name, date_of_birth, blood_group, color_id} = req.body;
     try {
         await employeeService.findEmployee(id).then(async (employee) => {
             if(employee){
@@ -90,6 +90,7 @@ router.put('/:id', async (req, res) => {
                 employee.lastName = last_name;
                 employee.dateofBirth = date_of_birth;
                 employee.bloodGroup = blood_group;
+                employee.colorId = color_id;
 
                 await employee.save();
                 return res.status(200).send({success: true, message: employee})

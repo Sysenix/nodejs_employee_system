@@ -5,12 +5,13 @@ const router = express.Router();
 const TimeoffService = require('../../services/TimeoffService');
 const timeoffService = new TimeoffService();
 
-router.get('/request/:id', async (req, res) => {
+router.post('/request/:id', async (req, res) => {
     const id = req.params.id;
+    const {startTime, endTime} = req.body;
     
     const date = Date();
     try {
-        const req_timeoff = await timeoffService.createTimeoff(date,date,id);
+        const req_timeoff = await timeoffService.createTimeoff(startTime,endTime,id);
         if(req_timeoff){
             return res.status(201).send({success: true, message: req_timeoff});
 

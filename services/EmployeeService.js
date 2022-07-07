@@ -1,5 +1,5 @@
 const { Employee } = require('../models');
-const models = require('../models/index');
+const models = require('../models');
 
 const ColorCategoryService = require('../services/ColorCategoryService');
 const colorCategoryService = new ColorCategoryService();
@@ -81,6 +81,8 @@ class EmployeeService {
     async getAllEmployees(){
         try {
             const employees = await Employee.findAll();
+            employees['colorHex'] = "TEST";
+            console.log(employees);
             return employees;
         } catch (error) {
             console.log('Something went wrong during getAllEmployees', error.message);
