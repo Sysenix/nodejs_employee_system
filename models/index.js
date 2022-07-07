@@ -47,7 +47,7 @@ sequelize
   })
   .catch(err => {
     console.error('Unable to connect to the database:', err.message);
-    process.exit(1);
+    process.exit();
   });
 
 

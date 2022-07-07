@@ -1,11 +1,11 @@
 {
   "development": {
     "username": "root",
-    "password": "mysqlpw",
+    "password": "123456",
     "database": "hubs_development",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "port": "49153",
+    "port": "58255",
     "logging": false
   },
   "test": {

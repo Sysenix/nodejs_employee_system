@@ -22,11 +22,11 @@ code {
   padding: 10px 50px;
 }
 .employees {
-  padding: 0 50px 50px;
+  padding: 0 10px 10px;
 }
+.employees .employeeavatar img {
+  padding: 20px;
 
-.employees .employee-avatar img {
-  border-radius: 5px 5px 0 0;
 }
 .employees .details h4 {
   margin: 10px 0;
@@ -58,9 +58,9 @@ code {
 }
 @media (min-width: 640px) {
   .employees {
-    display: grid;
+    display: flex;
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
+    gap: 10px;
   }
 
   .employees .details {

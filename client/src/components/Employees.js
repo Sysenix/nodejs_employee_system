@@ -9,37 +9,42 @@ const Employees = () => {
     useEffect(() => { 
         const fetchEmployees = async () => {
             const response = await fetch(API_URL);
-            console.log(response.json());
-            const employees = response.json();
+            const employees = await response.json();
             setEmployees(employees);
             setIsLoading(false);
         }
         fetchEmployees();
-    }); //
+    },[]); //
 
     return(
         <>
         {isLoading ? (<div className="loading">Loading...</div>) : (
         <div className="employees">
-            {employees.map((employee) => {
-                const {first_name, last_name, date_of_birth, blood_group, color_id} = employee;
+            {employees.message.map((employee,index) => {
+                
+                const {firstName, lastName, dateofBirth, bloodGroup,colorId} = employee;
+                const styles ={
+                    border: '3px solid rgba(0,0,0,'+colorId+')'
+                }
                 return (
-                    <article bordered="true" style="bordercolor:{color_id}">
-                        <div className="employee-avatar">
-                            <img src="https://via.placeholder.com/150" alt={first_name}></img>
-                        </div>
-                        <div className="details">
-                            <h2 className="employee-name">
-                                {first_name} {last_name}
-                            </h2>
-                            <h4>
-                                DOB: {date_of_birth}
-                            </h4>
-                            <h4>
-                                Blood Group: {blood_group}
-                            </h4>
-                        </div>
-                    </article>
+                    <div key={index}>
+                        <article>
+                            <div style={styles} className="employeeavatar">
+                                <img src="https://via.placeholder.com/150" alt={firstName}></img>
+                            </div>
+                            <div className="details">
+                                <h2 className="employee-name">
+                                    {firstName} {lastName}
+                                </h2>
+                                <h4>
+                                    DOB: {dateofBirth}
+                                </h4>
+                                <h4>
+                                    Blood Group: {bloodGroup}
+                                </h4>
+                            </div>
+                        </article>
+                    </div>
                 )
             })}
         </div> 
